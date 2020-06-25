@@ -5,6 +5,53 @@
 <!doctype html>
 <html lang="en">
   <head>
+
+        <style>
+
+          input{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+          }
+
+          input::placeholder {
+            color: #d3d3d3;
+          }
+
+          .submit{
+            background-color: #6BA3E8;
+          }
+
+          .center-column{
+            width:600px;
+            margin: 20px auto;
+            padding:20px;
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+          }
+
+          .item-row{
+            background-color: #F0F0F0;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 16px;
+            box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+          }
+
+          .btn_danger{
+            background-color: #ffae19;
+            border-color: #e59400;
+          }
+
+        </style>
+
+
+
+
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,30 +61,38 @@
 
     <title>Hello, world!</title>
   </head>
-  <body>
-    <h1>Hey this is utkarsh.</h1>
+  <body style="background-color: #FFFFFF;">
+        
+        <div class="center-column">
+        
+           <form method="POST" action="/">
+                
+                {% csrf_token %}
+                {{form.title}}
 
-      <form method="POST" action="/">
-        {% csrf_token %}
-        {{form.title}}
-        <input type="submit" name="new task">
-      </form>
+                <input type="submit" class="btn btn-info mt-3" name="new task">
+            
+            </form>
 
-    {% for my_todo in my_todos %}
+        
+          {% for my_todo in my_todos %}
       
-      <div>
-        <a href="{% url 'update_task' my_todo.id %}">Update</a>
-        <a href="{% url 'delete' my_todo.id %}">Delete</a>
+            <div class="item-row">
+        
+                <a class="btn btn-sm btn-success" href="{% url 'update_task' my_todo.id %}">Update</a>
+                <a class="btn btn-sm" style="background-color: #ffae19;" href="{% url 'delete' my_todo.id %}">Delete</a>
 
-        {% if my_todo.complete == True %}
-          <strike>{{ my_todo }}</strike>
-        {% else %}
-          <span>{{ my_todo }}</span>
-        {% endif %}
-      </div>
+                {% if my_todo.complete == True %}
+                <strike class="pl-5" style="color: black">{{ my_todo }}</strike>
+                {% else %}
+                <span class="pl-5" style="color: black">{{ my_todo }}</span>
+                {% endif %}
+        
+            </div>
 
-    {% endfor %}
-
+          {% endfor %}
+        
+        </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
